@@ -1,0 +1,7 @@
+{
+  "name": "PCAmusic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
