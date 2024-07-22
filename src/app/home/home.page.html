@@ -1,37 +1,13 @@
 <ion-content class="custom-bg-color">
   <swiper-container class="sp-bg-color">
-    <swiper-slide>
-      <h2>Hola soy un Vehiculo</h2>
-      <img
-        src="https://img.freepik.com/foto-gratis/vista-frontal-coche-deportivo-sedan-negro-puente_114579-4068.jpg?w=360&t=st=1721074565~exp=1721075165~hmac=15518da86acdc4f1b3c86df6cef5c920c782d232ba6f69e55badf8977709c175"
-        alt="Foto de un carro en la carretera"
-      />
-      <p>Soy un Vehiculo</p>
-    </swiper-slide>
-    <swiper-slide>
-      <h3>Hola soy otro Vehiculo</h3>
-      <ion-avatar>
-        <img
-          alt="Silhouette of a person's head"
-          src="https://ionicframework.com/docs/img/demos/avatar.svg"
-        />
-      </ion-avatar>
-      <img
-        src="https://img.freepik.com/fotos-premium/sunset-serenity-porsche-911-neonlit-miami_997071-21394.jpg?size=626&ext=jpg&ga=GA1.1.221603401.1721074457&semt=ais_user"
-        alt="Foto de un vehiculo"
-      />
-      <p class="cool-title">Soy otro vehiculo</p>
-    </swiper-slide>
-    <swiper-slide>
-      <h2 class="cool-title">Hola soy un titulo</h2>
-      <ion-icon name="construct-outline"></ion-icon>
+    <swiper-slide *ngFor="let slide of slides">
+      <h2>{{slide.title}}</h2>
+      <img src="{{slide.image}}" alt="Foto de un carro en la carretera" />
+      <ion-icon name="{{slide.icon}}"></ion-icon>
       <ion-avatar class="style-avatar">
-        <img
-          alt="Silhouette of a person's head"
-          src="https://ionicframework.com/docs/img/demos/avatar.svg"
-        />
+        <img alt="Silhouette of a person's head" src="{{slide.avatar}}" />
       </ion-avatar>
-      <p>Hola soy un parrafo</p>
+      <p>{{slide.description}}</p>
     </swiper-slide>
   </swiper-container>
 </ion-content>
