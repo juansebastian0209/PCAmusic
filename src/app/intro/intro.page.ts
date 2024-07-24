@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 @Component({
   selector: 'app-intro',
   templateUrl: './intro.page.html',
@@ -63,11 +64,12 @@ export class IntroPage implements OnInit {
       description: 'Guitarra',
     },
   ];
-  constructor(private router: Router) {}
+  constructor(private router: Router, private storage: Storage) {}
 
   ngOnInit() {}
   close() {
     //console.log('Estoy intentando cerrar la intro');
+    this.storage.set('isIntroShowed', true);
     this.router.navigateByUrl('/home');
   }
 }
