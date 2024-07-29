@@ -21,15 +21,36 @@
         formControlName="email"
       ></ion-input>
     </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div
+          *ngIf="(loginForm.get('email')?.hasError(validation.type) &&
+         loginForm.get('email')?.dirty)"
+        >
+          {{validation.message}}
+        </div>
+      </ng-container>
+    </div>
     <ion-item>
       <ion-input
         label="Password"
         labelPlacement="floating"
         placeholder="Contraseña"
         formControlName="password"
-        type ="password"
+        type="password"
       ></ion-input>
     </ion-item>
-    <ion-button type="submit"> Login </ion-button>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div
+          *ngIf="(loginForm.get('password')?.hasError(validation.type) &&
+         loginForm.get('password')?.dirty)"
+        >
+          {{validation.message}}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-button type="submit" [disabled]="!loginForm.valid"> Login </ion-button>
   </form>
 </ion-content>
