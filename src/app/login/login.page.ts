@@ -5,6 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { AuthenticateService } from '../services/authenticate.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,11 @@ export class LoginPage implements OnInit {
       { type: 'pattern', message: 'Contraseña invalida' },
     ],
   };
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthenticateService,
+    private navCtrl: NavController
+  ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(
         '',
@@ -45,5 +51,8 @@ export class LoginPage implements OnInit {
 
   loginUser(dataLogin: any) {
     console.log(dataLogin);
+    this.authService.loginUser(dataLogin).then((res) => {
+      this.navCtrl.navigateForward('/home');
+    });
   }
 }
