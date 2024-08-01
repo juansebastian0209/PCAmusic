@@ -6,7 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthenticateService } from '../services/authenticate.service';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-login',
@@ -25,10 +26,14 @@ export class LoginPage implements OnInit {
       { type: 'pattern', message: 'Contraseña invalida' },
     ],
   };
+
+  errorMessage: any;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticateService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private alertController: AlertController,
+    private storage: Storage
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(
@@ -38,6 +43,7 @@ export class LoginPage implements OnInit {
           /*Validators.email*/ Validators.pattern('^[^@s]+@[^@s]+.[^@s]+$'),
         ])
       ),
+
       password: new FormControl(
         '',
         Validators.compose([
@@ -51,8 +57,25 @@ export class LoginPage implements OnInit {
 
   loginUser(dataLogin: any) {
     console.log(dataLogin);
-    this.authService.loginUser(dataLogin).then((res) => {
-      this.navCtrl.navigateForward('/home');
+    this.authService
+      .loginUser(dataLogin)
+      .then((res) => {
+        this.errorMessage = '';
+        this.storage.set('isUserLoggedIn', true);
+        this.navCtrl.navigateForward('/home');
+      })
+      .catch((err) => {
+        this.errorMessage = err;
+        this.presentAlert(this.errorMessage);
+      });
+  }
+  async presentAlert(mss: string) {
+    const alert = await this.alertController.create({
+      header: 'Ops hubo un error',
+      message: mss,
+      buttons: ['OK', 'CANCELAR'],
     });
+
+    await alert.present();
   }
 }
