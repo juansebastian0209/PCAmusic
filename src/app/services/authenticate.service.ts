@@ -12,7 +12,7 @@ export class AuthenticateService {
         credentials.password === 'aB3dEfGh'
       ) {
         accept('Login Correcto');
-      }else{
+      } else {
         reject('Credenciales Incorrectas');
       }
     });
