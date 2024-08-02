@@ -1,14 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-buttons>
+      <ion-button (click)="goToLogin()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        <ion-title class="ion-text-center"> Register</ion-title>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <figure>
-    <img src="assets/images.Login-Image.png" />
+    <img src="assets/images/Login-Image.png" />
   </figure>
-  <form [formGroup]="registerForm">
+  <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
     <ion-item>
       <ion-input
         label="Name"
@@ -38,8 +43,12 @@
         label="Password"
         labelPlacement="floating"
         placeholder="Escriba su contraseña"
-        formControlName="password"
+        formControlName="password" type="password"
       ></ion-input>
     </ion-item>
   </form>
+
+  <ion-button type="submit" Expand="block" [disabled]="!registerForm.valid">
+    Register <ion-icon name="document-text-outline"></ion-icon>
+  </ion-button>
 </ion-content>

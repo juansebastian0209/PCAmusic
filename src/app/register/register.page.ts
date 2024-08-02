@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { AuthenticateService } from '../services/authenticate.service';
 
 @Component({
   selector: 'app-register',
@@ -39,7 +40,8 @@ export class RegisterPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private navCltr: NavController,
-    private storage: Storage
+    private storage: Storage,
+    private authService: AuthenticateService
   ) {
     this.registerForm = this.formBuilder.group({
       email: new FormControl(
@@ -56,25 +58,20 @@ export class RegisterPage implements OnInit {
           Validators.pattern('((?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,30})'),
         ])
       ),
-      name: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(
-            "/^[A-ZÁÉÍÓÚÑa-záéíóúñ]+([ '-][A-ZÁÉÍÓÚÑa-záéíóúñ]+)*$/"
-          ),
-        ])
-      ),
-      last_name: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(
-            "/^[A-ZÁÉÍÓÚÑa-záéíóúñ]+([ '-][A-ZÁÉÍÓÚÑa-záéíóúñ]+)*$/"
-          ),
-        ])
-      ),
+      name: new FormControl('', Validators.compose([Validators.required])),
+      last_name: new FormControl('', Validators.compose([Validators.required])),
     });
   }
   ngOnInit() {}
+
+  goToLogin() {
+    this.navCltr.navigateBack('/login');
+  }
+
+  register(registerData: any) {
+    console.log(registerData);
+    this.authService.registerUser(registerData).then((res) => {
+      this.navCltr.navigateBack('/login');
+    });
+  }
 }
