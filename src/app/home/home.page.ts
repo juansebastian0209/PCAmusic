@@ -6,6 +6,17 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  artists=[
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+  slidesOps = {
+  
+  }
   constructor(private router: Router) {}
   open() {
     //console.log('Estoy intentando abrir la intro');

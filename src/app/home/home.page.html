@@ -6,6 +6,16 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  Hola soy el home
-  <ion-icon name="open-outline" (click)="open()"></ion-icon>
+  <h1>Artistas</h1>
+  <swiper-container  slides-per-view="4" speed="400" >
+    <swiper-slide *ngFor="let artist of artists">
+      <ion-avatar>
+        <img
+          src="https://www.apple.com/newsroom/images/product/music/standard/Apple-Music-Live-Ed-Sheeran-with-guitar_big.jpg.large.jpg"
+          alt=""
+        />
+        <span>Nombre del artista </span>
+      </ion-avatar>
+    </swiper-slide>
+  </swiper-container>
 </ion-content>

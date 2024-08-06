@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
-export class introGuard implements CanActivate {
+export class IntroGuard implements CanActivate {
   constructor(private storage: Storage, private router: Router) {}
   async canActivate() {
     const intro = await this.storage.get('isIntroShowed');
