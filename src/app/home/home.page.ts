@@ -12,6 +12,11 @@ export class HomePage implements OnInit {
   artistsJson: any;
   artists: any;
   slidesOps = {};
+  song = {
+    name: '',
+    playing: false,
+    preview_url:''
+  }
   constructor(
     private router: Router,
     private musicService: MusicService,
@@ -34,13 +39,18 @@ export class HomePage implements OnInit {
   }
   async showSongs(artist: any) {
     console.log(artist);
+    const songs = await this.musicService.getArtistTracks(artist.id);
     const modal = await this.modalController.create({
       component: SongModalPage,
       componentProps: {
         name: artist.name,
         id: artist.id,
+        songs: songs,
       },
     });
+    modal.onDidDismiss().then(dataRetourned =>{
+      this.song = dataRetourned.data;
+    })
     modal.present();
   }
 }
