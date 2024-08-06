@@ -1,4 +1,4 @@
-//import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as dataArtists from './artists.json';
 
@@ -7,10 +7,18 @@ import * as dataArtists from './artists.json';
 })
 export class MusicService {
   urlService = 'https://music.fly.dev';
-  //httpHeader = { headers: new HttpHeaders('Content-Type : aplication/json') };
-  constructor() {} //private http: HttpClient
+  httpHeaders = {
+    headers: new HttpHeaders({ 'Content-Type': 'aplication/json' }),
+  };
+  constructor(private http: HttpClient) {}
 
   getArtistJson() {
     return dataArtists;
+  }
+  getArtist() {
+     return this.http.get(`${this.urlService}/artists`, this.httpHeaders);
+    // return fetch(`${this.urlService}/artists`).then(
+    //   response => response.json( )
+    // );
   }
 }

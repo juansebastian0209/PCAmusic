@@ -7,14 +7,11 @@
 </ion-header>
 <ion-content>
   <h1>Artistas</h1>
-  <swiper-container  slides-per-view="4" speed="400" >
+  <swiper-container slides-per-view="4" speed="400">
     <swiper-slide *ngFor="let artist of artists">
-      <ion-avatar>
-        <img
-          src="https://www.apple.com/newsroom/images/product/music/standard/Apple-Music-Live-Ed-Sheeran-with-guitar_big.jpg.large.jpg"
-          alt=""
-        />
-        <span>Nombre del artista </span>
+      <ion-avatar (click)="showSongs(artist)">
+        <img src="{{artist.image}}" alt="" />
+        <span>{{artist.name}} </span>
       </ion-avatar>
     </swiper-slide>
   </swiper-container>
